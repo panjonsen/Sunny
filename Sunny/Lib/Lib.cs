@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lib64And32.Properties;
+using System;
 using System.IO;
 using System.Runtime.InteropServices;
 
@@ -14,6 +15,8 @@ namespace Sunny.Lib
 
             var is64 = Environment.Is64BitProcess;
             var subfolder = is64 ? "\\win64\\" : "\\win32\\";
+
+           
 
             LoadLibrary(myFolder + subfolder + "Sunny.dll");
             Console.WriteLine(myPath);

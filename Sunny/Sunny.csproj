@@ -87,5 +87,11 @@
   <ItemGroup>
     <Folder Include="Controller\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\win32\Sunny.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\win64\Sunny64.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

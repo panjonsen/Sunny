@@ -1,5 +1,8 @@
 ﻿using Sunny.Lib;
 using System;
+using System.IO;
+using System.Reflection;
+using System.Resources;
 using System.Windows.Forms;
 
 namespace Sunny
@@ -9,12 +12,12 @@ namespace Sunny
         public Form1()
         {
             InitializeComponent();
-            SunnyLib.CreateCertificate();
+        
         }
 
-        private delegate void dListViewAdd(string method, string url, string postData, int statusCode, int onlyId,string headers);
+        private delegate void dListViewAdd(string method, string url, string postData, int statusCode, int onlyId, string headers);
 
-        private void ListViewAdd(string method,string url, string postData, int statusCode, int onlyId, string headers)
+        private void ListViewAdd(string method, string url, string postData, int statusCode, int onlyId, string headers)
         {
             ListViewItem listViewItem = new ListViewItem();
             listViewItem.Tag = listView1.Items.Count;
@@ -64,12 +67,10 @@ namespace Sunny
         {
             Request sunny = SunnyLib.MessageIdToSunny(MessageId);
 
-
-
             if (MsgType == Const.Net_Http_Response)
             {
                 dListViewAdd viewAdd = new dListViewAdd(ListViewAdd);
-                this.Invoke(viewAdd, Method, Url, sunny.request.Get_Data_UTF8(), sunny.response.Get_StatusCode(), OnlyId,sunny.request.Get_Headers());
+                this.Invoke(viewAdd, Method, Url, sunny.request.Get_Data_UTF8(), sunny.response.Get_StatusCode(), OnlyId, sunny.request.Get_Headers());
             }
             else if (MsgType == Const.Net_Http_Request)
             {
@@ -86,16 +87,26 @@ namespace Sunny
 
         private void Form1_Load(object sender, EventArgs e)
         {
+         
+
+          
+                Directory.CreateDirectory("win32");
+           
+            
+                Directory.CreateDirectory("win64");
+
+
+            
+
+          if (!File.Exists(@"win32/Sunny.dll") | !File.Exists(@"win64/Sunny.dll"))
+            {
+                MessageBox.Show("请在软件运行目录win32/win64下放置对应的版本的Sunny.dll 名字就叫这个");
+
+            }
+
+            SunnyLib.CreateCertificate();
             SunnyLib.Stop();
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    ListViewItem listViewItem = new ListViewItem();
-            //    listViewItem.Tag = listView1.Items.Count;
-            //    listViewItem.Text = Convert.ToString(listView1.Items.Count + 1);
-            //    listViewItem.SubItems.Add("123");
-            //    listViewItem.SubItems.Add("456");
-            //    listView1.Items.Add(listViewItem);
-            //}
+
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -105,14 +116,12 @@ namespace Sunny
 
         private void listView1_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-          
         }
 
         private void listView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            if (listView1.Items.Count!=0 && listView1.SelectedIndices != null && listView1.SelectedItems.Count>0)
+            if (listView1.Items.Count != 0 && listView1.SelectedIndices != null && listView1.SelectedItems.Count > 0)
             {
-          
                 string headers = listView1.SelectedItems[0].SubItems[6].Text;
 
                 string postData = listView1.SelectedItems[0].SubItems[3].Text;
