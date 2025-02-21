@@ -1,6 +1,6 @@
 # SunnyHttpCapture - HTTP/HTTPS 请求捕获 Demo
 
-![SunnyHttpCapture Logo](https://via.placeholder.com/150)  
+
 *基于 Sunny.dll 的轻量级 HTTP/HTTPS 请求捕获工具 Demo*
 
 ## 项目简介
@@ -8,7 +8,7 @@
 SunnyHttpCapture 是一个基于 `Sunny.dll` 库开发的 Demo 项目，旨在展示如何使用 C# 和 .NET Framework 4.x 捕获和分析 HTTP/HTTPS 请求。这个项目适合开发者学习网络请求捕获的基础知识，或者作为构建更复杂工具的起点。
 
 ### 核心依赖
-- **Sunny.dll**：一个强大的网络捕获库（假设为第三方库）。
+- **Sunny.dll**：一个强大的网络捕获库。
 - **.NET Framework 4.x**：目标运行时环境。
 
 ### 主要功能
